@@ -31,8 +31,8 @@ var TABBAR_HEIGHT:CGFloat = 49
 //  Parse Configuration
 //  *******************
 
-var PARSE_APP_ID = "3OhrMPft38zZQhcsbGnQy0YpxTn8E4qbysXyyJQs"
-var PARSE_APP_SECRET = "V8nGKFS3pfdPvn89OojDNaDN1T8l88N5jFLP7O7Y"
+var PARSE_APP_ID = "U7VILKaweI7qrSQWuHNqcdMTL9Jjb6GtiPJPVjCA"
+var PARSE_APP_SECRET = "D4mNycrbm5zNyol2K57Kdl146BG4mW55vHKzSQds"
 
 
 //  *******************

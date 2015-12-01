@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "flames8 (1).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "SignupBackground.jpg",
+      "filename" : "Trending.png",
       "scale" : "2x"
     },
     {

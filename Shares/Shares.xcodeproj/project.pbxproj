@@ -104,6 +104,36 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		15377D931C0D52B900808F51 /* Watchlist Views */ = {
+			isa = PBXGroup;
+			children = (
+				15E5EE921C0D081F0046B757 /* FirstViewController.swift */,
+			);
+			name = "Watchlist Views";
+			sourceTree = "<group>";
+		};
+		15377D941C0D52C100808F51 /* Search Views */ = {
+			isa = PBXGroup;
+			children = (
+				15E5EE941C0D081F0046B757 /* SecondViewController.swift */,
+			);
+			name = "Search Views";
+			sourceTree = "<group>";
+		};
+		15377D951C0D52C800808F51 /* Groups Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Groups Views";
+			sourceTree = "<group>";
+		};
+		15377D961C0D52DD00808F51 /* Settings Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Settings Views";
+			sourceTree = "<group>";
+		};
 		15E5EE841C0D081E0046B757 = {
 			isa = PBXGroup;
 			children = (
@@ -178,8 +208,10 @@
 		15E5EEC21C0D08E60046B757 /* Main Menu Selections */ = {
 			isa = PBXGroup;
 			children = (
-				15E5EE921C0D081F0046B757 /* FirstViewController.swift */,
-				15E5EE941C0D081F0046B757 /* SecondViewController.swift */,
+				15377D931C0D52B900808F51 /* Watchlist Views */,
+				15377D951C0D52C800808F51 /* Groups Views */,
+				15377D941C0D52C100808F51 /* Search Views */,
+				15377D961C0D52DD00808F51 /* Settings Views */,
 			);
 			name = "Main Menu Selections";
 			sourceTree = "<group>";
