@@ -9,8 +9,8 @@ Shares is a mobile stock investing app that creates the intersection between rea
 Table of Contents
 -----------------
 
-- [Pre-Requisites](#prerequisites)
 - [Features](#features)
+- [Pre-Requisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
@@ -20,25 +20,19 @@ Features
 --------
 
 - **Local Authentication** using Email and Password
-- **OAuth 1.0a Authentication** via Twitter
-- **OAuth 2.0 Authentication** via Facebook, Google, GitHub, LinkedIn, Instagram
-- Flash notifications
-- MVC Project Structure
-- Node.js clusters support
-- Rails 3.1-style asset pipeline by connect-assets (See FAQ)
-- LESS stylesheets (auto-compiled without any Gulp/Grunt hassle)
-- Bootstrap 3 + Flat UI + iOS7
-- Contact Form (powered by Mailgun, Sendgrid or Mandrill)
+- **OAuth 2.0 Authentication** via Facebook
+- Saved Profiles via Parse Integration
+- Push Notifications
+- MVC Structure
+- MarkitOnDemand Stock Data
+- Cocoapods
+- Realtime News via Twitter
 - **Account Management**
- - Gravatar
+ - Profile Picture
  - Profile Details
  - Change Password
  - Forgot Password
- - Reset Password
- - Link multiple OAuth strategies to one account
  - Delete Account
-- CSRF protection
-- **API Examples**: Facebook, Foursquare, Last.fm, Tumblr, Twitter, Stripe, LinkedIn and more.
 
 
 Prerequisites
