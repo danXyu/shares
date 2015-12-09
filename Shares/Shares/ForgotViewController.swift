@@ -93,28 +93,9 @@ class ForgotViewController: UIViewController {
   // ***********************************
   // MARK: - Parse Reset Password Method
   // ***********************************
-//  
-//  func resetPassword() {
-//    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-//    var emailAddress = userTextField.text
-//    
-//    if (emailAddress == "") {
-//      var alert = UIAlertView(title: "Form Field Error", message: "You must provide an email address", delegate: self, cancelButtonTitle: "Try Again")
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      alert.show()
-//    } else {
-//      PFUser.requestPasswordResetForEmailInBackground(emailAddress) { (succeeded, error) -> Void in
-//        if let error = error {
-//          var alert = UIAlertView(title: "Account Error", message: error.localizedDescription, delegate: self, cancelButtonTitle: "Try Again")
-//          MBProgressHUD.hideHUDForView(self.view, animated: true)
-//          alert.show()
-//        } else {
-//          var alert = UIAlertView(title: "Password Reset Successful", message: "please check your email", delegate: self, cancelButtonTitle: "Continue")
-//          MBProgressHUD.hideHUDForView(self.view, animated: true)
-//          alert.show()
-//          self.performSegueWithIdentifier("forgotSuccess", sender: self)
-//        }
-//      }
-//    }
-//  }
+  
+  func resetPassword() {
+      
+    print("This didn't work");
+  }
 }

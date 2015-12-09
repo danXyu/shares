@@ -20,12 +20,14 @@ import ParseFacebookUtilsV4
 // MARK: - LoginViewController
 // ***************************
 
+
 class LoginViewController: UIViewController , UITextFieldDelegate{
   
   
   // *****************************************
   // MARK: - Variables, Outlets, and Constants
   // *****************************************
+  
   
   @IBOutlet var titleLabel : UILabel!
   @IBOutlet var bgImageView : UIImageView!
@@ -46,13 +48,12 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
   // MARK: - View Controller Configuration
   // *************************************
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.passwordTextField.delegate = self
     self.userTextField.delegate = self
-    
-    // View Configuration
     
     bgImageView.image = UIImage(named: "LoginBackground")
     bgImageView.contentMode = .ScaleAspectFill
@@ -83,28 +84,17 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
   override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
     titleLabel.hidden = newCollection.verticalSizeClass == UIUserInterfaceSizeClass.Compact
   }
-  
-  override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .LightContent
-  }
-  
-  func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-    return true
-  }
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
-    //    textField.resignFirstResponder()
-    self.view.endEditing(true)
-    return false
-  }
+
   
   // ***************************
   // MARK: - Parse Login Methods
   // ***************************
   
+  
   func loginNormal() {
     MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-    var newUsername = userTextField.text!
-    var newPassword = passwordTextField.text!
+    let newUsername = userTextField.text!
+    let newPassword = passwordTextField.text!
     
     PFUser.logInWithUsernameInBackground(newUsername, password: newPassword, block: { (newUser: PFUser?, newError: NSError?) -> Void in
       if newUser != nil {
@@ -120,18 +110,29 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         MBProgressHUD.hideHUDForView(self.view, animated: true)
         
         if let errorString = newError!.userInfo["error"] as? NSString {
-          var alert = UIAlertView(title: "Error", message: errorString as String, delegate: self, cancelButtonTitle: "okay")
-          alert.show()
+          let alertController = UIAlertController(
+            title: "Error",
+            message: errorString as String,
+            preferredStyle: .Alert
+          )
+          
+          alertController.addAction(UIAlertAction(
+            title: "Try Again",
+            style: .Default,
+            handler: nil
+            ))
+          self.presentViewController(alertController, animated: true, completion: nil)
         }
       }
       
     })
   }
   
+  
   func loginFacebook() {
     MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     
-    var permissions = ["public_profile", "email", "user_friends"]
+    let permissions = ["public_profile", "email", "user_friends"]
     PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user: PFUser?, error: NSError?) -> Void in
       if let user = user {
         if user.isNew {
@@ -157,13 +158,13 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
   }
   
+  
   func createFacebookUser() {
     FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": ["public_profile", "picture", "email"]]).startWithCompletionHandler( { (connection, user, error) -> Void in
       
       if let userEmail = user.objectForKey("email") as? String {
         CURRENT_USER.email = userEmail
       }
-      
       
       let id = user["objectID"] as! String
       let url = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=640&height=640")!
@@ -175,10 +176,8 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
       CURRENT_USER["fbId"] = id
       CURRENT_USER["proPic"] = PFFile(name: "propic.jpg", data: dataS!)
       CURRENT_USER["fullName"] = user["name"] as! String
-      CURRENT_USER["firstName"] = user["first_name"] as! String
-      CURRENT_USER["lastName"] = user["last_name"] as! String!
-      CURRENT_USER["school"] = "Generic High School"
-      CURRENT_USER["year"] = "Year Placeholder"
+      CURRENT_USER["investingStrat"] = "Value Investing"
+      CURRENT_USER["netWorth"] = "No net worth"
       
       CURRENT_USER.saveInBackgroundWithBlock({ (done, error) -> Void in
         if error == nil {
@@ -195,5 +194,20 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         }
       })
     })
+  }
+  
+  
+  // ***************************
+  // MARK: - Text Field Delegate
+  // ***************************
+  
+  
+  func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    return true
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+    return false
   }
 }

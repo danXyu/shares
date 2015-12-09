@@ -7,8 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151006AE1C17934400F0D7E4 /* SearchGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006AD1C17934400F0D7E4 /* SearchGroupsViewController.swift */; };
+		151006B01C17938300F0D7E4 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006AF1C17938300F0D7E4 /* NewGroupViewController.swift */; };
+		151006B31C1795DA00F0D7E4 /* WatchlistViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006B21C1795DA00F0D7E4 /* WatchlistViewCell.swift */; };
+		151006B61C17B0D800F0D7E4 /* SearchGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006B51C17B0D800F0D7E4 /* SearchGroupCell.swift */; };
+		151006B81C17F05800F0D7E4 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006B71C17F05800F0D7E4 /* GroupCell.swift */; };
+		151006BA1C17F1BE00F0D7E4 /* SingleGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006B91C17F1BE00F0D7E4 /* SingleGroupViewController.swift */; };
+		151006BC1C17F50200F0D7E4 /* SearchStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006BB1C17F50200F0D7E4 /* SearchStockCell.swift */; };
+		151006BE1C17F52200F0D7E4 /* SearchStockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151006BD1C17F52200F0D7E4 /* SearchStockViewController.swift */; };
+		15377D981C0E749800808F51 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15377D971C0E749800808F51 /* ProfileViewController.swift */; };
+		15377D9A1C0E74AB00808F51 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15377D991C0E74AB00808F51 /* EditProfileViewController.swift */; };
+		15377D9C1C0FBC5400808F51 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15377D9B1C0FBC5400808F51 /* GroupsViewController.swift */; };
 		15E5EE911C0D081F0046B757 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5EE901C0D081F0046B757 /* AppDelegate.swift */; };
-		15E5EE931C0D081F0046B757 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5EE921C0D081F0046B757 /* FirstViewController.swift */; };
+		15E5EE931C0D081F0046B757 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5EE921C0D081F0046B757 /* WatchlistViewController.swift */; };
 		15E5EE951C0D081F0046B757 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E5EE941C0D081F0046B757 /* SecondViewController.swift */; };
 		15E5EE981C0D081F0046B757 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15E5EE961C0D081F0046B757 /* Main.storyboard */; };
 		15E5EE9A1C0D081F0046B757 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15E5EE991C0D081F0046B757 /* Assets.xcassets */; };
@@ -43,9 +54,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151006AD1C17934400F0D7E4 /* SearchGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupsViewController.swift; sourceTree = "<group>"; };
+		151006AF1C17938300F0D7E4 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
+		151006B21C1795DA00F0D7E4 /* WatchlistViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistViewCell.swift; sourceTree = "<group>"; };
+		151006B51C17B0D800F0D7E4 /* SearchGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupCell.swift; sourceTree = "<group>"; };
+		151006B71C17F05800F0D7E4 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		151006B91C17F1BE00F0D7E4 /* SingleGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleGroupViewController.swift; sourceTree = "<group>"; };
+		151006BB1C17F50200F0D7E4 /* SearchStockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStockCell.swift; sourceTree = "<group>"; };
+		151006BD1C17F52200F0D7E4 /* SearchStockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStockViewController.swift; sourceTree = "<group>"; };
+		15377D971C0E749800808F51 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		15377D991C0E74AB00808F51 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		15377D9B1C0FBC5400808F51 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		15E5EE8D1C0D081F0046B757 /* Shares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E5EE901C0D081F0046B757 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		15E5EE921C0D081F0046B757 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		15E5EE921C0D081F0046B757 /* WatchlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		15E5EE941C0D081F0046B757 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		15E5EE971C0D081F0046B757 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		15E5EE991C0D081F0046B757 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,25 +126,50 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		151006B11C1795C600F0D7E4 /* TV Cells */ = {
+			isa = PBXGroup;
+			children = (
+				151006B21C1795DA00F0D7E4 /* WatchlistViewCell.swift */,
+				151006BB1C17F50200F0D7E4 /* SearchStockCell.swift */,
+			);
+			name = "TV Cells";
+			sourceTree = "<group>";
+		};
+		151006B41C17AC8E00F0D7E4 /* TV Cells */ = {
+			isa = PBXGroup;
+			children = (
+				151006B51C17B0D800F0D7E4 /* SearchGroupCell.swift */,
+				151006B71C17F05800F0D7E4 /* GroupCell.swift */,
+			);
+			name = "TV Cells";
+			sourceTree = "<group>";
+		};
 		15377D931C0D52B900808F51 /* Watchlist Views */ = {
 			isa = PBXGroup;
 			children = (
-				15E5EE921C0D081F0046B757 /* FirstViewController.swift */,
+				151006B11C1795C600F0D7E4 /* TV Cells */,
+				15E5EE921C0D081F0046B757 /* WatchlistViewController.swift */,
+				151006BD1C17F52200F0D7E4 /* SearchStockViewController.swift */,
 			);
 			name = "Watchlist Views";
 			sourceTree = "<group>";
 		};
-		15377D941C0D52C100808F51 /* Search Views */ = {
+		15377D941C0D52C100808F51 /* Trending Views */ = {
 			isa = PBXGroup;
 			children = (
 				15E5EE941C0D081F0046B757 /* SecondViewController.swift */,
 			);
-			name = "Search Views";
+			name = "Trending Views";
 			sourceTree = "<group>";
 		};
 		15377D951C0D52C800808F51 /* Groups Views */ = {
 			isa = PBXGroup;
 			children = (
+				151006B41C17AC8E00F0D7E4 /* TV Cells */,
+				15377D9B1C0FBC5400808F51 /* GroupsViewController.swift */,
+				151006AD1C17934400F0D7E4 /* SearchGroupsViewController.swift */,
+				151006AF1C17938300F0D7E4 /* NewGroupViewController.swift */,
+				151006B91C17F1BE00F0D7E4 /* SingleGroupViewController.swift */,
 			);
 			name = "Groups Views";
 			sourceTree = "<group>";
@@ -130,6 +177,8 @@
 		15377D961C0D52DD00808F51 /* Settings Views */ = {
 			isa = PBXGroup;
 			children = (
+				15377D971C0E749800808F51 /* ProfileViewController.swift */,
+				15377D991C0E74AB00808F51 /* EditProfileViewController.swift */,
 			);
 			name = "Settings Views";
 			sourceTree = "<group>";
@@ -209,8 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				15377D931C0D52B900808F51 /* Watchlist Views */,
+				15377D941C0D52C100808F51 /* Trending Views */,
 				15377D951C0D52C800808F51 /* Groups Views */,
-				15377D941C0D52C100808F51 /* Search Views */,
 				15377D961C0D52DD00808F51 /* Settings Views */,
 			);
 			name = "Main Menu Selections";
@@ -430,16 +479,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				151006B31C1795DA00F0D7E4 /* WatchlistViewCell.swift in Sources */,
 				15EFF47F1C0D2868004A416D /* SignupViewController.swift in Sources */,
 				15EFF47B1C0D1618004A416D /* Fonts.swift in Sources */,
 				15E5EE951C0D081F0046B757 /* SecondViewController.swift in Sources */,
 				15EFF4811C0D2871004A416D /* ForgotViewController.swift in Sources */,
 				15EFF4791C0D1426004A416D /* ImageFuncs.swift in Sources */,
+				151006BE1C17F52200F0D7E4 /* SearchStockViewController.swift in Sources */,
+				151006BC1C17F50200F0D7E4 /* SearchStockCell.swift in Sources */,
+				15377D9C1C0FBC5400808F51 /* GroupsViewController.swift in Sources */,
 				15EFF4771C0D1389004A416D /* Colors.swift in Sources */,
+				15377D981C0E749800808F51 /* ProfileViewController.swift in Sources */,
+				151006B81C17F05800F0D7E4 /* GroupCell.swift in Sources */,
+				151006BA1C17F1BE00F0D7E4 /* SingleGroupViewController.swift in Sources */,
 				15EFF47D1C0D1B98004A416D /* LoginViewController.swift in Sources */,
+				15377D9A1C0E74AB00808F51 /* EditProfileViewController.swift in Sources */,
+				151006B01C17938300F0D7E4 /* NewGroupViewController.swift in Sources */,
 				15E5EE911C0D081F0046B757 /* AppDelegate.swift in Sources */,
 				15E5EEC61C0D0C290046B757 /* Configuration.swift in Sources */,
-				15E5EE931C0D081F0046B757 /* FirstViewController.swift in Sources */,
+				151006B61C17B0D800F0D7E4 /* SearchGroupCell.swift in Sources */,
+				151006AE1C17934400F0D7E4 /* SearchGroupsViewController.swift in Sources */,
+				15E5EE931C0D081F0046B757 /* WatchlistViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

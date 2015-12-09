@@ -17,12 +17,14 @@ import ParseFacebookUtilsV4
 // MARK: - LoginViewController
 // ***************************
 
+
 class SignupViewController: UIViewController, UITextFieldDelegate {
   
   
   // *****************************************
   // MARK: - Variables, Outlets, and Constants
   // *****************************************
+  
   
   @IBOutlet var bgImageView : UIImageView!
   @IBOutlet var titleLabel : UILabel!
@@ -52,11 +54,13 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet var facebookButton : UIButton!
   
   var alertError: NSString!
+  var hasSignedUp = false
   
   
   // *************************************
   // MARK: - View Controller Configuration
   // *************************************
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -133,9 +137,150 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     facebookButton.addTarget(self, action: "registerFacebook", forControlEvents: .TouchUpInside)
   }
   
-  override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .LightContent
+  
+  // ****************************
+  // MARK: - Parse Signup Methods
+  // ****************************
+  
+  
+  func registerNormal() {
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    if self.checkNormalSignup() == true {
+      self.createNormalUser()
+    } else {
+      MBProgressHUD.hideHUDForView(self.view, animated: true)
+      
+      let alertController = UIAlertController(
+        title: "Form Field Error",
+        message: alertError as String,
+        preferredStyle: .Alert
+      )
+      
+      alertController.addAction(UIAlertAction(
+        title: "Try Again",
+        style: .Default,
+        handler: nil
+        ))
+      self.presentViewController(alertController, animated: true, completion: nil)
+    }
   }
+  
+  func checkNormalSignup()-> Bool {
+    return true
+  }
+  
+  func createNormalUser() {
+    CURRENT_USER.username = userTextField.text
+    CURRENT_USER.email = userTextField.text
+    CURRENT_USER.password = passwordTextField.text
+    
+    CURRENT_USER.signUpInBackgroundWithBlock {(succeeded, error) -> Void in
+      if error == nil {
+        self.hasSignedUp = true
+        if UIDevice.currentDevice().model != "iPhone Simulator" {
+          let currentInstallation = PFInstallation.currentInstallation()
+          currentInstallation["user"] = CURRENT_USER
+          currentInstallation.saveInBackground()
+        }
+        self.performSegueWithIdentifier("signupSuccess", sender: self)
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        
+        let alertController = UIAlertController(
+          title: "Sign Up Success",
+          message: "Sign up successful. Please confirm your email",
+          preferredStyle: .Alert
+        )
+        
+        alertController.addAction(UIAlertAction(
+          title: "Continue",
+          style: .Default,
+          handler: nil
+          ))
+        self.presentViewController(alertController, animated: true, completion: nil)
+      } else {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        if let errorString = error!.userInfo["error"] as? NSString {
+          var alert = UIAlertView(title: "Sign Up Error", message: errorString as String, delegate: self, cancelButtonTitle: "Try Again")
+          alert.show()
+        }
+        
+      }
+    }
+  }
+  
+  
+  func registerFacebook() {
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    
+    let permissions = ["public_profile", "email", "user_friends"]
+    PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user: PFUser?, error: NSError?) -> Void in
+      if let user = user {
+        if user.isNew {
+          NSLog("User signed up and logged in through Facebook!")
+          HAS_SIGNED_UP = true
+          CURRENT_USER = user
+          self.createFacebookUser()
+        } else {
+          NSLog("User logged in through Facebook!")
+          CURRENT_USER = user
+          if UIDevice.currentDevice().model != "iPhone Simulator" {
+            let currentInstallation = PFInstallation.currentInstallation()
+            currentInstallation["user"] = CURRENT_USER
+            currentInstallation.saveInBackground()
+          }
+          MBProgressHUD.hideHUDForView(self.view, animated: true)
+          self.performSegueWithIdentifier("loginSuccess", sender: self)
+        }
+      } else {
+        NSLog("Something went wrong. User cancelled facebook Login")
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+      }
+    }
+  }
+  
+  
+  func createFacebookUser() {
+    FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields": ["public_profile", "picture", "email"]]).startWithCompletionHandler( { (connection, user, error) -> Void in
+      
+      if let userEmail = user.objectForKey("email") as? String {
+        CURRENT_USER.email = userEmail
+      }
+      
+      let id = user["objectID"] as! String
+      let url = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=640&height=640")!
+      let data = NSData(contentsOfURL: url)
+      let image = UIImage(data: data!)
+      let imageS = scaleImage(image!, newSize: 60)
+      let dataS = UIImageJPEGRepresentation(imageS, 0.9)
+      
+      CURRENT_USER["fbId"] = id
+      CURRENT_USER["proPic"] = PFFile(name: "propic.jpg", data: dataS!)
+      CURRENT_USER["fullName"] = user["name"] as! String
+      CURRENT_USER["investingStrat"] = "Value Investing"
+      CURRENT_USER["netWorth"] = "No net worth"
+      
+      CURRENT_USER.saveInBackgroundWithBlock({ (done, error) -> Void in
+        if error == nil {
+          if UIDevice.currentDevice().model != "iPhone Simulator" {
+            let currentInstallation = PFInstallation.currentInstallation()
+            currentInstallation["user"] = CURRENT_USER
+            currentInstallation.saveInBackground()
+          }
+          MBProgressHUD.hideHUDForView(self.view, animated: true)
+          self.performSegueWithIdentifier("loginSuccess", sender: self)
+        } else {
+          print(error)
+          MBProgressHUD.hideHUDForView(self.view, animated: true)
+        }
+      })
+    })
+  }
+  
+  
+  // ***************************
+  // MARK: - Text Field Delegate
+  // ***************************
+  
   
   func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
     return true
@@ -145,146 +290,4 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     textField.resignFirstResponder()
     return true
   }
-  
-  
-  // ****************************
-  // MARK: - Parse Signup Methods
-  // ****************************
-//  
-//  func registerNormal() {
-//    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-//    if self.checkNormalSignup() == true {
-//      self.createNormalUser()
-//    } else {
-//      var alert = UIAlertView(title: "Form Field Error", message: alertError as String, delegate: self, cancelButtonTitle: "Try Again")
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      alert.show()
-//    }
-//  }
-//  
-//  func checkNormalSignup()-> Bool {
-//    var name = fullNameTextField.text.componentsSeparatedByString(" ")
-//    if fullNameTextField.text.isEmpty || userTextField.text.isEmpty || passwordTextField.text.isEmpty || passwordConfirmTextField.text.isEmpty {
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      alertError = "All form fields must be filled"
-//      return false
-//    } else if name.count < 2 {
-//      alertError = "Please provide your first AND last name"
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      return false
-//    } else if passwordTextField.text != passwordConfirmTextField.text {
-//      alertError = "Passwords did not match"
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      return false
-//    } else if count(userTextField.text) < 5 {
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      alertError = "Username must be at least 5 characters long"
-//      return false
-//    } else if count(passwordTextField.text) <= 6 {
-//      MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      alertError = "Password must be more than 6 characters long"
-//      return false
-//    }
-//    return true
-//  }
-//  
-//  func createNormalUser() {
-//    var name = fullNameTextField.text.componentsSeparatedByString(" ")
-//    userPF.username = userTextField.text
-//    userPF.email = userTextField.text
-//    userPF.password = passwordTextField.text
-//    
-//    userPF["fullName"] = fullNameTextField.text
-//    userPF["firstName"] = name[0] as String
-//    userPF["lastName"] = name[1] as String
-//    userPF["school"] = "Generic High School"
-//    userPF["year"] = "Year Placeholder"
-//    
-//    userPF.signUpInBackgroundWithBlock {(succeeded, error) -> Void in
-//      if error == nil {
-//        hasSignedUp = true
-//        currentUser = userPF
-//        if UIDevice.currentDevice().model != "iPhone Simulator" {
-//          let currentInstallation = PFInstallation.currentInstallation()
-//          currentInstallation["user"] = currentUser
-//          currentInstallation.saveInBackground()
-//        }
-//        self.performSegueWithIdentifier("signupSuccess", sender: self)
-//        var alert = UIAlertView(title: "Sign Up Success", message: "Sign up successful. Please confirm your email.", delegate: self, cancelButtonTitle: "Continue")
-//        MBProgressHUD.hideHUDForView(self.view, animated: true)
-//        alert.show()
-//      } else {
-//        MBProgressHUD.hideHUDForView(self.view, animated: true)
-//        if let errorString = error!.userInfo?["error"] as? NSString {
-//          var alert = UIAlertView(title: "Sign Up Error", message: errorString as String, delegate: self, cancelButtonTitle: "Try Again")
-//          alert.show()
-//        }
-//        
-//      }
-//    }
-//  }
-//  
-//  func registerFacebook() {
-//    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-//    
-//    var permissions = ["public_profile", "email", "user_friends"]
-//    PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) { (user: PFUser?, error: NSError?) -> Void in
-//      if let user = user {
-//        if user.isNew {
-//          NSLog("User signed up and logged in through Facebook!")
-//          hasSignedUp = true
-//          currentUser = user
-//          self.createFacebookUser()
-//        } else {
-//          NSLog("User logged in through Facebook!")
-//          currentUser = user
-//          if UIDevice.currentDevice().model != "iPhone Simulator" {
-//            let currentInstallation = PFInstallation.currentInstallation()
-//            currentInstallation["user"] = currentUser
-//            currentInstallation.saveInBackground()
-//          }
-//          MBProgressHUD.hideHUDForView(self.view, animated: true)
-//          self.performSegueWithIdentifier("loginSuccess", sender: self)
-//        }
-//      } else {
-//        NSLog("Something went wrong. User cancelled facebook Login")
-//        MBProgressHUD.hideHUDForView(self.view, animated: true)
-//      }
-//    }
-//  }
-//  
-//  func createFacebookUser() {
-//    FBRequestConnection.startWithGraphPath("me", completionHandler: { (connection, fbUser, fbError) -> Void in
-//      if let userEmail = fbUser.objectForKey("email") as? String {currentUser.email = userEmail}
-//      var id = fbUser.objectID as String
-//      var url = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=640&height=640")!
-//      var data = NSData(contentsOfURL: url)
-//      var image = UIImage(data: data!)
-//      var imageS = scaleImage(image!, 60)
-//      var dataS = UIImageJPEGRepresentation(imageS, 0.9)
-//      
-//      currentUser["fbId"] = fbUser.objectID as String!
-//      currentUser["proPic"] = PFFile(name: "proPic.jpg", data: dataS)
-//      currentUser["fullName"] = fbUser.name
-//      currentUser["firstName"] = fbUser.first_name as String!
-//      currentUser["lastName"] = fbUser.last_name as String!
-//      currentUser["school"] = "Generic High School"
-//      currentUser["year"] = "Year Placeholder"
-//      
-//      currentUser.saveInBackgroundWithBlock({ (done, error) -> Void in
-//        if !(error != nil) {
-//          if UIDevice.currentDevice().model != "iPhone Simulator" {
-//            let currentInstallation = PFInstallation.currentInstallation()
-//            currentInstallation["user"] = currentUser
-//            currentInstallation.saveInBackground()
-//          }
-//          MBProgressHUD.hideHUDForView(self.view, animated: true)
-//          self.performSegueWithIdentifier("loginSuccess", sender: self)
-//        } else {
-//          println(error)
-//          MBProgressHUD.hideHUDForView(self.view, animated: true)
-//        }
-//      })
-//    })
-//  }
 }

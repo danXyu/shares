@@ -20,6 +20,7 @@ let iOSVERION = NSString(string: DEVICE.systemVersion).doubleValue
 let iOS8 = (iOSVERION >= 8)
 let iOS7 = (iOSVERION >= 7 && iOSVERION < 8)
 let DEVICE = UIDevice.currentDevice()
+var WINDOW: UIWindow? = nil
 let PHONE_WIDTH = UIScreen.mainScreen().bounds.width
 let PHONE_HEIGHT = UIScreen.mainScreen().bounds.height
 let MAINBOARD = UIStoryboard(name: "Main", bundle: nil)

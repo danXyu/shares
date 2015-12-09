@@ -23,17 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     
-//    UINavigationBar.appearance().barTintColor = navColor
-//    UITabBar.appearance().barTintColor = navColor
-//    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: colorText]
+    UINavigationBar.appearance().barTintColor = BACKGROUND_COLOR
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: TEXT_COLOR]
     
-    
+    UITabBar.appearance().barTintColor = BACKGROUND_COLOR
+    UITabBar.appearance().tintColor = TEXT_COLOR
+//    UITabBar.appearance().selectedImageTintColor = TEXT_COLOR
+    UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: TEXT_COLOR], forState: UIControlState.Normal)
     
     Parse.setApplicationId(PARSE_APP_ID, clientKey: PARSE_APP_SECRET)
     PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
     PFUser.enableRevocableSessionInBackground()
 
-    PFUser.logOutInBackground()
+//    PFUser.logOutInBackground()
     
     if PFUser.currentUser() == nil || !PFUser.currentUser()!.authenticated {
       let redirectLogin = MAINBOARD.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
